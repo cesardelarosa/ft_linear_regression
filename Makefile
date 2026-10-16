@@ -2,12 +2,16 @@ VENV = .venv
 PYTHON = $(VENV)/bin/python
 PIP = $(VENV)/bin/pip
 
+REQUIREMENTS = requirements.txt
+
+OUTPUT = params.json
+
 all: $(VENV)
 
-$(VENV): requirements.txt
+$(VENV): $(REQUIREMENTS)
 	python3 -m venv $(VENV)
 	$(PIP) install --upgrade pip
-	$(PIP) install -r requirements.txt
+	$(PIP) install -r $(REQUIREMENTS)
 	@touch $(VENV)
 
 train: $(VENV)
@@ -16,13 +20,16 @@ train: $(VENV)
 predict: $(VENV)
 	$(PYTHON) predict.py
 
+plot: $(VENV)
+	$(PYTHON) plot.py
+
 clean:
-	rm -f params.json
-	rm -rf __pycache__
+	find . -type d -name "__pycache__" -exec rm -rf {} +
+	find . -type f -name "*.pyc" -delete
 
 fclean: clean
-	rm -rf $(VENV)
+	rm -rf $(OUTPUT) $(VENV)
 
 re: fclean all
 	
-.PHONY: all train predict clean fclean re
+.PHONY: all train predict plot clean fclean re
