@@ -1,1 +1,10 @@
+# 42 Confidential
 *.subject.pdf
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+params.json
+
+
