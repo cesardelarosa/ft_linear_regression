@@ -52,7 +52,7 @@ make clean    # Elimina bytecode y cachés de Python
 make fclean   # Elimina params.json y el entorno virtual .venv
 ```
 
-### Modelo y fórmulas
+## Modelo y fórmulas
 
 La función de estimación (hipótesis) es:
 
