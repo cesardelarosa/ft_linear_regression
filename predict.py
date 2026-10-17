@@ -1,21 +1,28 @@
 from utils import load_params, predict
 
+import math
 import sys
 
 def get_mileage() -> float:
     raw = input("Enter mileage in km: ")
     mileage = float(raw)
-    if mileage < 0:
-        raise ValueError("mileage cannot be negative")
+    
+    if not math.isfinite(mileage) or mileage < 0:
+        raise ValueError("mileage must be a finite non-negative number")
+    
     return mileage
 
 def main():
     try:
         mileage = get_mileage()
-        theta0, theta1 = load_params("params.json")
+        try:
+            theta0, theta1 = load_params("params.json")
+        except FileNotFoundError:
+            theta0, theta1 = 0.0, 0.0
         price = predict(mileage, theta0, theta1)
         print(f"The estimated car price is: {price:.2f}")
-    except (ValueError, EOFError) as e:
+    
+    except (ValueError, OverflowError, OSError, EOFError) as e:
         sys.exit(f"Error: {e}")
     except KeyboardInterrupt:
         sys.exit("\nExecution interrupted by user.")

@@ -1,18 +1,20 @@
 from utils import load_params, predict, read_csv
 
+import sys
 import matplotlib.pyplot as plt
 
-def plot(x: list[float], y: list[float], theta0: float, theta1: float):
-    plt.scatter(x, y)
+def plot(x: list[float], y: list[float], theta0: float | None, theta1: float | None):
+    plt.scatter(x, y, color="blue", label="Data points")
     plt.title("Car: Price vs. Mileage")
     plt.xlabel("Mileage (km)")
     plt.ylabel("Price")
 
-    x_min = min(x)
-    x_max = max(x)
-    y_min = predict(x_min, theta0, theta1)
-    y_max = predict(x_max, theta0, theta1)
-    plt.plot([x_min, x_max], [y_min, y_max], color="red", label="Regression line")
+    if theta0 is not None and theta1 is not None:
+        x_min = min(x)
+        x_max = max(x)
+        y_min = predict(x_min, theta0, theta1)
+        y_max = predict(x_max, theta0, theta1)
+        plt.plot([x_min, x_max], [y_min, y_max], color="red", label="Regression line")
 
     plt.legend()
     plt.show()
@@ -20,10 +22,17 @@ def plot(x: list[float], y: list[float], theta0: float, theta1: float):
 def main():
     try:
         x, y = read_csv("data.csv")
-        theta0, theta1 = load_params("params.json")
+        try:
+            theta0, theta1 = load_params("params.json")
+        except FileNotFoundError:
+            print("Warning: 'params.json' not found. Showing data points only.", file=sys.stderr)
+            theta0, theta1 = None, None
         plot(x, y, theta0, theta1)
-    except ():
-        pass
+    
+    except (ValueError, OSError) as e:
+        sys.exit(f"Error: {e}")
+    except KeyboardInterrupt:
+        sys.exit("\nExecution interrupted by user.")
 
 if __name__ == "__main__":
     main()
