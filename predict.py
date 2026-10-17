@@ -25,7 +25,8 @@ def main():
     except (ValueError, OverflowError, OSError, EOFError) as e:
         sys.exit(f"Error: {e}")
     except KeyboardInterrupt:
-        sys.exit("\nExecution interrupted by user.")
+        print("\nExecution interrupted by user.")
+        sys.exit(0)
 
 if __name__ == "__main__":
     main()
