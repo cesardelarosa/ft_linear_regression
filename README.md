@@ -46,7 +46,12 @@ make predict
 make plot
 ```
 
-### 5. Limpieza de cachés o entorno
+### 5. Evaluar precisión de la recta
+```bash
+make precision
+```
+
+### 6. Limpieza de cachés o entorno
 ```bash
 make clean    # Elimina bytecode y cachés de Python
 make fclean   # Elimina params.json y el entorno virtual .venv
