@@ -1,7 +1,7 @@
-from utils import load_params, predict
-
 import math
 import sys
+
+from utils import load_params, predict
 
 def get_mileage() -> float:
     raw = input("Enter mileage in km: ")

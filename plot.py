@@ -1,7 +1,7 @@
-from utils import load_params, predict, read_csv
-
 import sys
 import matplotlib.pyplot as plt
+
+from utils import load_params, predict, read_csv
 
 def plot(x: list[float], y: list[float], theta0: float | None, theta1: float | None):
     plt.scatter(x, y, color="blue", label="Data points")
