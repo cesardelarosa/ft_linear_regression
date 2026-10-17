@@ -23,6 +23,9 @@ predict: $(VENV)
 plot: $(VENV)
 	$(PYTHON) plot.py
 
+precision: $(VENV)
+	$(PYTHON) precision.py
+
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 	find . -type f -name "*.pyc" -delete
@@ -32,4 +35,4 @@ fclean: clean
 
 re: fclean all
 	
-.PHONY: all train predict plot clean fclean re
+.PHONY: all train predict plot precision clean fclean re
