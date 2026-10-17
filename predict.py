@@ -8,9 +8,9 @@ def get_mileage() -> float:
         raise ValueError("mileage cannot be negative")
     return mileage
 
-def load_params() -> tuple[float, float]:
+def load_params(file: str) -> tuple[float, float]:
     try:
-        with open("params.json", "r") as f:
+        with open(file, "r") as f:
             params = json.load(f)
             return float(params["theta0"]), float(params["theta1"])
     except FileNotFoundError:
@@ -23,7 +23,7 @@ def predict(mileage: float, theta0: float, theta1: float) -> float:
 def main():
     try:
         mileage = get_mileage()
-        theta0, theta1 = load_params()
+        theta0, theta1 = load_params("params.json")
         price = predict(mileage, theta0, theta1)
         print(f"The estimated car price is: {price:.2f}")
     except (ValueError, EOFError, KeyError, json.JSONDecodeError) as e:
