@@ -26,27 +26,27 @@ El proyecto requiere un entorno Unix/Linux y las herramientas básicas de Python
 
 El proyecto incluye un `Makefile` que gestiona el entorno virtual de Python y sus dependencias de forma aislada:
 
-# 1. Crear el entorno virtual e instalar dependencias
+### 1. Crear el entorno virtual e instalar dependencias
 ```bash
 make
 ```
 
-# 2. Entrenar el modelo
+### 2. Entrenar el modelo
 ```bash
 make train
 ```
 
-# 3. Predecir un precio
+### 3. Predecir un precio
 ```bash
 make predict
 ```
 
-# 4. Visualizar datos y recta
+### 4. Visualizar datos y recta
 ```bash
 make plot
 ```
 
-# 5. Limpieza de cachés o entorno
+### 5. Limpieza de cachés o entorno
 ```bash
 make clean    # Elimina bytecode y cachés de Python
 make fclean   # Elimina params.json y el entorno virtual .venv
