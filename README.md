@@ -103,6 +103,7 @@ En cada época se realiza una actualización simultánea de ambos pesos:
 $$\theta_0 := \theta_0 - \alpha \frac{\partial J}{\partial \theta_0}, \qquad \theta_1 := \theta_1 - \alpha \frac{\partial J}{\partial \theta_1}$$
 
 El bucle se detiene cuando se alcanza el límite de iteraciones (`epochs`) o cuando la norma del gradiente converge por debajo de una tolerancia predefinida:
+
 $$|\nabla J(\theta_0, \theta_1)| = \sqrt{(\frac{\partial J}{\partial \theta_0})^2 + (\frac{\partial J}{\partial \theta_1})^2} < \varepsilon$$
 
 ---
