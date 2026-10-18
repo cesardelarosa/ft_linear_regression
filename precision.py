@@ -1,7 +1,7 @@
 import math
 import sys
 
-from utils import load_params, predict, read_csv
+from utils import load_params, predict_price, read_csv, PARAMS_FILE
 
 def mean_squared_error(y: list[float], y_hat: list[float]) -> float:
     return sum((yi - y_pred) ** 2 for yi, y_pred in zip(y, y_hat)) / len(y)
@@ -24,9 +24,9 @@ def r2_score(y: list[float], y_hat: list[float]) -> float:
 
 def main():
     try:
-        x, y = read_csv("data.csv")
-        theta0, theta1 = load_params("params.json")
-        y_hat = [predict(xi, theta0, theta1) for xi in x]
+        x, y = read_csv()
+        theta0, theta1 = load_params()
+        y_hat = [predict_price(xi, theta0, theta1) for xi in x]
         
         r2 = r2_score(y, y_hat)
         rmse = root_mean_squared_error(y, y_hat)
@@ -35,7 +35,8 @@ def main():
         print(f"R^2 = {r2:.4f}")
         print(f"RMSE = {rmse:.2f}")
         print(f"MAE = {mae:.2f}")
-    
+    except FileNotFoundError:
+        sys.exit(f"Error: '{PARAMS_FILE}' not found. Run 'make train' first.")
     except (ValueError, OSError) as e:
         sys.exit(f"Error: {e}")
     except KeyboardInterrupt:

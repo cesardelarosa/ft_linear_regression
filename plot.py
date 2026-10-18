@@ -1,7 +1,7 @@
 import sys
 import matplotlib.pyplot as plt
 
-from utils import load_params, predict, read_csv
+from utils import load_params, predict_price, read_csv, PARAMS_FILE
 
 def plot(x: list[float], y: list[float], theta0: float | None, theta1: float | None):
     plt.scatter(x, y, color="blue", label="Data points")
@@ -12,8 +12,8 @@ def plot(x: list[float], y: list[float], theta0: float | None, theta1: float | N
     if theta0 is not None and theta1 is not None:
         x_min = min(x)
         x_max = max(x)
-        y_min = predict(x_min, theta0, theta1)
-        y_max = predict(x_max, theta0, theta1)
+        y_min = predict_price(x_min, theta0, theta1)
+        y_max = predict_price(x_max, theta0, theta1)
         plt.plot([x_min, x_max], [y_min, y_max], color="red", label="Regression line")
 
     plt.legend()
@@ -21,11 +21,11 @@ def plot(x: list[float], y: list[float], theta0: float | None, theta1: float | N
 
 def main():
     try:
-        x, y = read_csv("data.csv")
+        x, y = read_csv()
         try:
-            theta0, theta1 = load_params("params.json")
+            theta0, theta1 = load_params()
         except FileNotFoundError:
-            print("Warning: 'params.json' not found. Showing data points only.", file=sys.stderr)
+            print(f"Warning: '{PARAMS_FILE}' not found. Showing data points only.", file=sys.stderr)
             theta0, theta1 = None, None
         plot(x, y, theta0, theta1)
     

@@ -1,7 +1,7 @@
 import math
 import sys
 
-from utils import load_params, predict
+from utils import load_params, predict_price
 
 def get_mileage() -> float:
     raw = input("Enter mileage in km: ")
@@ -16,10 +16,10 @@ def main():
     try:
         mileage = get_mileage()
         try:
-            theta0, theta1 = load_params("params.json")
+            theta0, theta1 = load_params()
         except FileNotFoundError:
             theta0, theta1 = 0.0, 0.0
-        price = predict(mileage, theta0, theta1)
+        price = predict_price(mileage, theta0, theta1)
         print(f"The estimated car price is: {price:.2f}")
     
     except (ValueError, OverflowError, OSError, EOFError) as e:
