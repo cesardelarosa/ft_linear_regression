@@ -4,7 +4,10 @@
 # Python
 .venv/
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+
+# Output
 params.json
 
 # Vim
@@ -16,3 +19,10 @@ params.json
 # Linux
 *~
 .directory
+
+# Linters 
+.ruff_cache/
+
+# Tests
+.pytest_cache/
+.mypy_cache/
